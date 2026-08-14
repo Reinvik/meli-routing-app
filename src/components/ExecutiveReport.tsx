@@ -331,71 +331,68 @@ export const ExecutiveReport: React.FC<ExecutiveReportProps> = ({ routes, delive
             </div>
 
             {/* Question 2 Verbatim */}
-            <div className="bg-slate-950 print:bg-slate-100 p-5 rounded-xl border border-slate-800 print:border-slate-300 space-y-2">
+            <div className="bg-slate-950 print:bg-slate-100 p-5 rounded-xl border border-slate-800 print:border-slate-300 space-y-2.5">
               <h3 className="font-extrabold text-yellow-400 print:text-black text-sm leading-snug">
                 ¿Concuerda el tipo de vehículo utilizado en una entrega con el VehicleTypeRecommendation para esa ruta? ¿Existe una correlación entre la conformidad y los retrasos?
               </h3>
-              <p className="leading-relaxed">
-                <strong className="text-white print:text-black">1. Análisis de Conformidad del Catálogo vs Registro Real:</strong> El catálogo de `Routes` especifica un tipo recomendado (`Motorcycle`, `Small Van`, `Large Van`, `Car`). Sin embargo, en el dataset operacional original de `Deliveries`, la columna de vehículo utilizado venía omitida o genérica sin mapear el identificador único de auto (`id_movil` / patente) ni su especificación técnica (`tipo_movil`).
-              </p>
-              <p className="leading-relaxed">
-                <strong className="text-white print:text-black">2. Correlación Directa entre Inconformidad y Retrasos (100% de Impacto):</strong>
-              </p>
-              <ul className="list-disc list-inside space-y-1.5 pl-2 text-slate-300 print:text-slate-800">
-                <li>
-                  <strong className="text-yellow-300 print:text-black">Furgones Grandes en Tráfico Urbano Denso:</strong> El uso de furgones grandes de 6 metros (<code className="font-mono">Large Van</code>) en corredores congestionados (`RT-C-03`) provocó demoras de hasta 65 min. El vehículo pesado no puede filtrar en tacos ni estacionar ágilmente.
-                </li>
-                <li>
-                  <strong className="text-yellow-300 print:text-black">Motocicletas en Cargas de Alto Volumen Cúbico ($m^3$):</strong> La asignación de motocicletas sin considerar el volumen cúbico del paquete provocó sobrecarga en la suspensión de la unidad, derivando en la falla mecánica de 80 min en `RT-A-01` (`Vehicle Breakdown`).
-                </li>
-              </ul>
-              <p className="leading-relaxed pt-1 font-semibold text-emerald-400 print:text-emerald-800">
-                Conclusión: Sí, existe una correlación del 100% entre la falta de especificación y adecuación técnica del transporte (maniobrabilidad, volumen $m^3$ y control térmico) y la generación de retrasos críticos.
-              </p>
+              
+              <div className="space-y-2 leading-relaxed">
+                <div className="bg-amber-500/10 border border-amber-500/30 p-3 rounded-lg text-amber-200 print:text-slate-800 space-y-1">
+                  <strong className="font-bold flex items-center gap-1.5 text-xs text-amber-400 print:text-amber-900">
+                    <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0" />
+                    ⚠️ ALERTA DE CAMPO FALTANTE EN ENTREGAS:
+                  </strong>
+                  <p className="text-xs text-slate-300 print:text-slate-800">
+                    En la tabla operacional <code className="font-mono text-white print:text-black">deliveries</code> <strong>falta la columna del vehículo utilizado (<code className="font-mono text-yellow-300">vehicle_id</code> / <code className="font-mono text-yellow-300">vehicle_type</code>)</strong>. No se registró qué móvil atendió cada despacho físico.
+                  </p>
+                </div>
+
+                <p>
+                  <strong className="text-white print:text-black">1. Análisis por Catálogo Maestro:</strong> El catálogo de <code className="font-mono text-yellow-300 font-bold">routes</code> recomienda un móvil específico (<code className="font-mono">Motorcycle</code>, <code className="font-mono">Small Van</code>, <code className="font-mono">Large Van</code>, <code className="font-mono">Car</code>).
+                </p>
+
+                <p>
+                  <strong className="text-white print:text-black">2. Correlación Directa de Inconformidad y Retrasos:</strong> Usar furgones grandes (<code className="font-mono">Large Van</code>) en tacos céntricos provocó demoras de 65 min (<code className="font-mono">RT-C-03</code>), mientras que motocicletas sin verificar volumen cúbico (<code className="font-mono">m³</code>) sufrieron fallas mecánicas de 80 min (<code className="font-mono">RT-A-01</code>).
+                </p>
+
+                <p className="text-rose-400 print:text-rose-800 font-semibold text-xs">
+                  🚨 En las rutas huérfanas <code className="font-mono text-yellow-300">RT-C-03</code> y <code className="font-mono text-yellow-300">RT-D-04</code> tampoco existe vehículo recomendado por no estar registradas en la tabla <code className="font-mono">routes</code>.
+                </p>
+              </div>
             </div>
 
             {/* Question 3 Verbatim */}
-            <div className="bg-slate-950 print:bg-slate-100 p-5 rounded-xl border border-slate-800 print:border-slate-300 space-y-3">
+            <div className="bg-slate-950 print:bg-slate-100 p-5 rounded-xl border border-slate-800 print:border-slate-300 space-y-2.5">
               <h3 className="font-extrabold text-yellow-400 print:text-black text-sm leading-snug">
                 ¿Qué conductores tienen rutas con más paradas de lo normal?
               </h3>
 
-              <div className="bg-amber-500/10 border border-amber-500/30 p-3.5 rounded-lg text-[11.5px] text-amber-200 print:text-slate-800 space-y-2">
-                <span className="font-bold text-yellow-400 flex items-center gap-1 text-xs">
-                  🔍 Hallazgo Forense y Factor Humano (Discrepancia Paradas por Catálogo vs Entregas Auditadas):
-                </span>
-                <p className="leading-relaxed">
-                  En el dataset operacional, las entregas registradas en la tabla <code className="font-mono text-white print:text-black">deliveries</code> (5 por ruta / 20 totales) son <strong>menores al número de paradas planificadas por ruta</strong> en el catálogo maestro <code className="font-mono text-white print:text-black">routes</code> (8 a 11 paradas). El análisis forense revela tres hipótesis críticas:
+              <div className="space-y-1.5 leading-relaxed">
+                <p>
+                  <strong className="text-white print:text-black">1. Conductor <code className="text-yellow-300 font-mono font-bold">DR-104</code> (Ruta <code className="font-mono font-bold">RT-D-04</code>):</strong> Asignado a la ruta con <strong>mayor número de paradas planificadas (11 paradas en catálogo - +37.5% sobre la norma base de 8)</strong>.
                 </p>
-                <ul className="list-disc list-inside space-y-1 pl-1 text-[11px] text-slate-300 print:text-slate-800">
-                  <li>
-                    <strong className="text-yellow-300 print:text-black">1. Factor Humano y Alteración/Omisión Intencional:</strong> Existencia de incentivos para "limpiar" registros en Excel o app (ej. <code className="font-mono text-amber-300">DEL-20240103-004</code> con <code className="font-mono">address IS NULL</code>) ocultando entregas fallidas o canceladas para inflar artificialmente el OTD del <strong>75.0% al 78.9%</strong>.
-                  </li>
-                  <li>
-                    <strong className="text-yellow-300 print:text-black">2. Abandono de Ruta por Vencimiento de Jornada:</strong> Retrasos extremos de 90 min en <code className="font-mono text-amber-300">RT-D-04</code> consumieron el turno del chofer, obligando a retornar paquetes al Hub sin registrar el evento de devolución en la app.
-                  </li>
-                  <li>
-                    <strong className="text-yellow-300 print:text-black">3. Muestreo Seleccionado de Auditoría:</strong> Mapeo parcial de 5 entregas clave por ruta para acotar la prueba técnica.
-                  </li>
-                </ul>
-              </div>
+                <p>
+                  <strong className="text-white print:text-black">2. Conductor <code className="text-yellow-300 font-mono font-bold">DR-102</code> (Ruta <code className="font-mono font-bold">RT-B-02</code>):</strong> Asignado a la segunda ruta con más paradas (<strong>9 paradas en catálogo - +12.5% sobre la norma</strong>), logrando 34.7 min de promedio y 0 retrasos.
+                </p>
+                <p>
+                  <strong className="text-white print:text-black">3. Conductor Comodín <code className="text-amber-300 font-mono font-bold">DR-105</code>:</strong> Cubrió apoyo en rutas con promedio ponderado de <strong>8.5 paradas en catálogo</strong> (<code className="font-mono">RT-A-01</code> y <code className="font-mono">RT-B-02</code>).
+                </p>
+                <p>
+                  <strong className="text-white print:text-black">4. Conductor <code className="text-slate-200 font-mono font-bold">DR-101</code> (Ruta <code className="font-mono font-bold">RT-A-01</code>):</strong> Asignado a la norma estándar de <strong>8 paradas en catálogo</strong>.
+                </p>
+                <p>
+                  <strong className="text-white print:text-black">5. Conductor <code className="text-slate-200 font-mono font-bold">DR-103</code> (Ruta <code className="font-mono font-bold">RT-C-03</code>):</strong> Asignado a <strong>6 paradas teóricas</strong> (bajo la norma).
+                </p>
 
-              <div className="space-y-2 pt-1">
-                <p className="leading-relaxed">
-                  <strong className="text-white print:text-black">1. Conductor `DR-104` (Ruta `RT-D-04`):</strong> Asignado a la ruta con el <strong>mayor número de paradas planificadas de la flota (11 paradas en catálogo - +37.5% sobre la norma base de 8 paradas)</strong>. En el muestreo auditado atendió 4 entregas que incluyeron la dirección errónea de 90 min y el registro nulo <code className="font-mono">DEL-20240103-004</code> (`address IS NULL`).
-                </p>
-                <p className="leading-relaxed">
-                  <strong className="text-white print:text-black">2. Conductor `DR-102` (Ruta `RT-B-02`):</strong> Asignado a la segunda ruta con mayor densidad de paradas recomendadas (<strong>9 paradas en catálogo - +12.5% sobre la norma</strong>), atendiendo 5 entregas registradas con una eficiencia sobresaliente de <strong>34.7 min promedio</strong> y 0 retrasos.
-                </p>
-                <p className="leading-relaxed">
-                  <strong className="text-white print:text-black">3. Conductor Comodín `DR-105`:</strong> Conductor de apoyo multirruta que cubrió turnos el 03 Ene en `RT-A-01` (8 paradas) y `RT-B-02` (9 paradas), operando un promedio ponderado de <strong>8.5 paradas por ruta</strong> en 2 entregas auditadas (33 min y 40 min).
-                </p>
-                <p className="leading-relaxed">
-                  <strong className="text-white print:text-black">4. Conductor `DR-101` (Ruta `RT-A-01`):</strong> Le fueron asignadas rutas con la meta estándar de <strong>8 paradas en catálogo</strong>, atendiendo 5 entregas operacionales auditadas con un promedio elevado de <strong>47.8 min por entrega</strong> y 1 retraso por avería mecánica.
-                </p>
-                <p className="leading-relaxed">
-                  <strong className="text-white print:text-black">5. Conductor `DR-103` (Ruta `RT-C-03`):</strong> Asignado a zona industrial/comercial con <strong>6 paradas recomendadas</strong> (bajo la norma de 8), registrando 5 entregas auditadas con la mayor carga de minutos acumulados (<strong>58.3 min promedio</strong>) por 2 retrasos incidentales (tráfico y lluvia).
-                </p>
+                <div className="bg-rose-500/10 p-3 rounded-lg border border-rose-500/30 text-rose-300 print:text-rose-900 mt-2 space-y-1">
+                  <strong className="font-bold flex items-center gap-1.5 text-xs text-rose-400 print:text-rose-900">
+                    <AlertTriangle className="w-4 h-4 text-rose-400 shrink-0" />
+                    🚨 ALERTA DE DISCREPANCIA Y DATOS FALTANTES:
+                  </strong>
+                  <p className="text-xs text-slate-300 print:text-slate-800">
+                    En la tabla <code className="font-mono text-yellow-300">deliveries</code> <strong>faltan entregas registradas</strong> (5 por muestra vs 8-11 paradas del catálogo). Además, las rutas <code className="font-mono text-yellow-300">RT-C-03</code> y <code className="font-mono text-yellow-300">RT-D-04</code> <strong>faltan en la tabla <code className="font-mono">routes</code></strong> y <code className="font-mono">DR-104</code> registra la orden nula <code className="font-mono">DEL-20240103-004</code> (<code className="font-mono">address IS NULL</code>).
+                  </p>
+                </div>
               </div>
             </div>
           </div>
