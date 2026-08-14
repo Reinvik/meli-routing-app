@@ -492,6 +492,9 @@ export const ExecutiveReport: React.FC<ExecutiveReportProps> = ({ routes, delive
             <li>
               <strong>Solución a Problema 5 — Modelo de Datos Enriquecido (`id_movil`, `tipo_movil`, $m^3$, $kg$ y Temperatura):</strong> Creación de columnas obligatorias en la arquitectura para mapear patente/ID de auto (`id_movil`), clasificación de vehículo (`tipo_movil`), límites de carga física (peso máx $kg$ y volumen máx $m^3$) y rango térmico exigido por el alimento (congelado, refrigerado, ambiente).
             </li>
+            <li>
+              <strong>Solución a Problema 6 — Gobernanza de Datos & Consultas SQL de Control Automático (SQL 5, 9 y 10):</strong> Implementación de Consultas SQL de auditoría automatizada en tiempo real (Consultas SQL 5, 9 y 10 en SQL Explorer) que ejecutan <code className="font-mono text-yellow-300 font-bold">FULL OUTER JOIN</code> entre <code className="font-mono font-bold">routes</code> y <code className="font-mono font-bold">deliveries</code> para detectar rutas huérfanas (<code className="font-mono text-yellow-300">RT-C-03</code> y <code className="font-mono text-yellow-300">RT-D-04</code>), brechas de entregas faltantes respecto al catálogo y campos omitidos (<code className="font-mono text-yellow-300">vehicle_id</code>), respaldado por restricciones rígidas de Integridad Referencial (<code className="font-mono">FOREIGN KEY CONSTRAINT</code>) y reglas <code className="font-mono">NOT NULL</code> en Supabase.
+            </li>
           </ol>
         </div>
 

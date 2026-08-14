@@ -54,11 +54,11 @@ export const SolutionsView: React.FC = () => {
     },
     {
       id: 'sol-5',
-      title: '5. Pipeline de Calidad de Datos y Restricciones Relacionales en Supabase',
-      problem: 'Inconsistencias de base de datos como la orden `DEL-20240103-004` con dirección nula (`WHERE address IS NULL`) y rutas huérfanas fuera de catálogo.',
-      proposal: 'Implementar restricciones de integridad referencial rígidas (`FOREIGN KEY`) en Supabase y validación de campos obligatorios en el API de la app.',
-      roi: '100% de confiabilidad e integridad de datos en el sistema relacional.',
-      category: 'Gobernanza de Datos'
+      title: '5. Gobernanza de Datos & Consultas SQL de Control Automático (SQL 5, 9 y 10)',
+      problem: 'Falta de datos en tablas esenciales (rutas huérfanas RT-C-03 y RT-D-04 ausentes en catálogo routes, entregas faltantes respecto a paradas planificadas, campo vehicle_id omitido en entregas y dirección nula en DEL-20240103-004).',
+      proposal: 'Implementar Consultas SQL de Control en tiempo real (SQL 5, 9 y 10 en SQL Explorer) con FULL OUTER JOIN para auditar brechas de datos, junto con restricciones rígidas de Integridad Referencial (FOREIGN KEY) y reglas NOT NULL en Supabase.',
+      roi: '100% de confiabilidad en la BD, detección proactiva de anomalías y garantía de toma de decisiones sobre datos 100% limpios.',
+      category: 'Gobernanza de Datos & SQL'
     },
     {
       id: 'sol-6',
