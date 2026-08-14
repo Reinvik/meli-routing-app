@@ -304,22 +304,30 @@ export const ExecutiveReport: React.FC<ExecutiveReportProps> = ({ routes, delive
 
           <div className="space-y-4 text-xs text-slate-300 print:text-slate-800">
             {/* Question 1 Verbatim */}
-            <div className="bg-slate-950 print:bg-slate-100 p-5 rounded-xl border border-slate-800 print:border-slate-300 space-y-2">
+            <div className="bg-slate-950 print:bg-slate-100 p-5 rounded-xl border border-slate-800 print:border-slate-300 space-y-2.5">
               <h3 className="font-extrabold text-yellow-400 print:text-black text-sm leading-snug">
                 ¿Qué rutas tienen los mayores retrasos en comparación con su AverageDeliveryTime?
               </h3>
-              <p className="leading-relaxed">
-                <strong className="text-white print:text-black">1. Ruta `RT-A-01` (City Center North - Objetivo: 30 min):</strong> Registra el mayor tiempo real promedio con <strong className="text-yellow-400 print:text-black">49.0 min (+19.0 min de exceso / +63.3% sobre la meta)</strong>, impactada severamente por la avería mecánica en motocicleta de 80 min (`DEL-20240102-005`) y el tráfico urbano denso.
-              </p>
-              <p className="leading-relaxed">
-                <strong className="text-white print:text-black">2. Ruta `RT-C-03` (Industrial South / Commercial - Ruta Huérfana fuera de catálogo):</strong> Registra un tiempo real promedio de <strong className="text-yellow-400 print:text-black">58.3 min (+8.3 min sobre estimaciones operacionales)</strong>, afectada por congestión vehicular pesada (`DEL-20240101-004` de 65 min) y lluvia (`DEL-20240101-007` de 55 min) operando con furgón de gran tonelaje (`Large Van`) en zona céntrica.
-              </p>
-              <p className="leading-relaxed">
-                <strong className="text-white print:text-black">3. Ruta `RT-D-04` (Suburban West - Ruta Huérfana fuera de catálogo):</strong> Presenta el pico de retraso individual más extremo de todo el dataset con <strong className="text-rose-400 print:text-black">90 min en `DEL-20240102-008`</strong> debido a dirección errónea (`Wrong Address`) por falta de autocompletado GPS en el checkout de la app.
-              </p>
-              <p className="leading-relaxed">
-                <strong className="text-white print:text-black">4. Ruta `RT-B-02` (Residential West - Objetivo: 38 min):</strong> Presenta el mejor desempeño operacional del dataset con un tiempo real promedio de <strong className="text-emerald-400 print:text-black">34.7 min (-3.3 min de ahorro)</strong> y 0 entregas retrasadas.
-              </p>
+              
+              <div className="space-y-2 leading-relaxed">
+                <p>
+                  <strong className="text-white print:text-black">1. Ruta <code className="text-yellow-300 font-mono font-bold">RT-A-01</code> (City Center North):</strong> Es la <strong>única ruta registrada en el catálogo que presenta retraso respecto a su meta</strong>, promediando <strong className="text-yellow-400 print:text-black">49.0 min vs 30.0 min de meta (+19.0 min de exceso / +63.3%)</strong>.
+                </p>
+                
+                <p>
+                  <strong className="text-white print:text-black">2. Ruta <code className="text-emerald-300 font-mono font-bold">RT-B-02</code> (Residential West):</strong> Cumple la meta del catálogo con un tiempo promedio de <strong className="text-emerald-400 print:text-black">34.7 min vs 38.0 min de meta (-3.3 min de ahorro)</strong> y 0 entregas retrasadas.
+                </p>
+                
+                <div className="bg-rose-500/10 p-3 rounded-lg border border-rose-500/30 text-rose-300 print:text-rose-900 mt-2 space-y-1">
+                  <strong className="font-bold flex items-center gap-1.5 text-xs text-rose-400 print:text-rose-900">
+                    <AlertTriangle className="w-4 h-4 text-rose-400 shrink-0" />
+                    ⚠️ ALERTA DE DATOS FALTANTES (Rutas sin tiempo objetivo en catálogo):
+                  </strong>
+                  <p className="text-xs text-slate-300 print:text-slate-800">
+                    Las rutas <strong className="text-white font-mono">RT-C-03</strong> (promedio real: <strong>58.3 min</strong>) y <strong className="text-white font-mono">RT-D-04</strong> (promedio real: <strong>48.8 min</strong>, con pico individual de 90 min) <strong>NO TIENEN <code className="font-mono text-yellow-300">AverageDeliveryTime</code> en el catálogo</strong> por ser <strong>rutas huérfanas ausentes de la tabla <code className="font-mono text-yellow-300">routes</code></strong>. Por lo tanto, no cuentan con tiempo de espera/meta formal para comparar.
+                  </p>
+                </div>
+              </div>
             </div>
 
             {/* Question 2 Verbatim */}
