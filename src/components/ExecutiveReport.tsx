@@ -264,7 +264,7 @@ export const ExecutiveReport: React.FC<ExecutiveReportProps> = ({ routes, delive
           <div className="bg-slate-950 print:bg-slate-100 p-5 rounded-xl border border-slate-800 print:border-slate-300 space-y-3.5 text-sm text-slate-300 print:text-slate-800">
             <div className="flex items-center gap-2 text-base font-bold text-white print:text-black">
               <span>🎯</span>
-              <span>Cumplimiento OTD: <strong className="text-yellow-400 print:text-black">78.9% (Operacional)</strong> / <strong className="text-amber-400 print:text-black">75.0% (Estricto)</strong></span>
+              <span>Cumplimiento OTD: <strong className="text-yellow-400 print:text-black">78.9%</strong> (15 de 19 entregas a tiempo)</span>
             </div>
 
             <div className="space-y-1.5">
@@ -517,8 +517,8 @@ export const ExecutiveReport: React.FC<ExecutiveReportProps> = ({ routes, delive
                 <tr>
                   <td className="py-3 px-3 font-bold text-white print:text-black">On-Time Delivery Rate (OTD %)</td>
                   <td className="py-3 px-3 text-center text-emerald-400 print:text-emerald-800 font-mono font-bold">≥ 95.0%</td>
-                  <td className="py-3 px-3 text-center text-amber-400 print:text-amber-800 font-mono font-bold">78.9% (Operacional) / 75.0% (Estricto)</td>
-                  <td className="py-3 px-3 text-slate-300 print:text-slate-800"><strong>¿Por qué?:</strong> Satisfacción del comprador en comestibles en línea.</td>
+                  <td className="py-3 px-3 text-center text-amber-400 print:text-amber-800 font-mono font-bold">78.9%</td>
+                  <td className="py-3 px-3 text-slate-300 print:text-slate-800"><strong>¿Por qué?:</strong> Satisfacción del comprador en comestibles en línea (15 de 19 entregas válidas a tiempo).</td>
                 </tr>
                 <tr>
                   <td className="py-3 px-3 font-bold text-white print:text-black">Tasa de Integridad Alimentaria & Cadena de Frío</td>

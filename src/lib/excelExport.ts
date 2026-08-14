@@ -10,11 +10,10 @@ export const exportReportToExcel = (routes: Route[], deliveries: Delivery[]) => 
   const summaryData = [
     ['MERCADO FOODS - INFORME EJECUTIVO Y DIAGNÓSTICO OPERACIONAL DE RUTAS'],
     ['Fecha de Generación:', new Date().toLocaleDateString('es-CL'), 'Plataforma:', 'Supabase Esquema meli'],
-    ['Resumen Ejecutivo:', 'OTD del 78.9% Operacional (75.0% Estricto). Faltan datos en tabla routes (rutas huérfanas RT-C-03 y RT-D-04), faltan entregas respecto a paradas planificadas y faltan campos esenciales como vehicle_id. Rutas suboptimizadas con potencial de ahorro de hasta un 75% en distancia.'],
+    ['Resumen Ejecutivo:', 'OTD del 78.9%. Faltan datos en tabla routes (rutas huérfanas RT-C-03 y RT-D-04), faltan entregas respecto a paradas planificadas y faltan campos esenciales como vehicle_id. Rutas suboptimizadas con potencial de ahorro de hasta un 75% en distancia.'],
     [],
     ['MÉTRICA / KPI', 'VALOR OTD / ESTADO', 'META (TARGET)', 'DESCRIPCIÓN OPERACIONAL'],
-    ['Cumplimiento OTD (Operacional)', '78.9%', '≥ 95.0%', '15 entregadas / 19 operacionales (Excluye registro nulo)'],
-    ['Cumplimiento OTD (Estricto)', '75.0%', '≥ 95.0%', '15 entregadas / 20 registros totales del dataset'],
+    ['Cumplimiento OTD', '78.9%', '≥ 95.0%', '15 entregadas a tiempo de 19 entregas válidas'],
     ['Total Registros', deliveries.length, '-', '20 entregas registradas en 3 días (01 Ene, 02 Ene, 03 Ene)'],
     ['Entregas a Tiempo', deliveries.filter(d => d.status === 'Delivered').length, '-', '15 entregadas dentro de ventana pactada'],
     ['Entregas con Retraso', deliveries.filter(d => d.status === 'Delayed').length, '0', '4 entregas retrasadas (Tráfico, Clima, Avería, Dirección)'],

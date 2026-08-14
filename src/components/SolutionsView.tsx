@@ -74,50 +74,50 @@ export const SolutionsView: React.FC = () => {
     {
       kpi: 'On-Time Delivery (OTD %)',
       target: '≥ 95.0%',
-      current: '78.9% (Operacional: 15/19) | 75.0% (Estricto: 15/20)',
-      why: 'Indicador principal de satisfacción del comprador. Mide el % de entregas a tiempo (15 entregadas de 19 válidas = 78.9% | 15 de 20 dataset = 75.0%). NUNCA 80.0% por la entrega nula.'
+      current: '78.9%',
+      why: 'Indicador principal de satisfacción del comprador. Mide el porcentaje de entregas realizadas a tiempo (15 de 19 válidas).'
     },
     {
-      kpi: 'Kilometraje Total Recorrido (Eficiencia Espacial)',
+      kpi: 'Kilometraje Total Recorrido',
       target: '12.57 km',
       current: '45.26 km',
-      why: 'La re-sectorización por clústeres elimina el cruce en paralelo de los 4 vehículos sobre el mismo corredor, reduciendo 32.69 km inútiles (-72.2%).'
+      why: 'La re-sectorización por clústeres elimina el cruce en paralelo de vehículos, reduciendo 32.69 km (-72.2%).'
     },
     {
-      kpi: 'Tiempo Promedio de Desviación por Ruta (Min Exceso)',
+      kpi: 'Tiempo Promedio de Desviación por Ruta',
       target: '≤ +5 min',
       current: '+19 min (RT-A-01)',
-      why: 'Mide la precisión del modelo de planificación de tiempos frente al comportamiento real del tráfico urbano.'
+      why: 'Mide la precisión del modelo de planificación de tiempos frente al tráfico urbano real.'
     },
     {
       kpi: 'Factor de Ocupación Cúbica (m³)',
       target: '≤ 85.0% Cúbico',
       current: 'Sin Medir (m³)',
-      why: 'Evita sobrepasar la capacidad física del maletero en productos livianos pero voluminosos (dilema del plomo vs las plumas).'
+      why: 'Evita sobrepasar la capacidad del maletero en productos voluminosos.'
     },
     {
-      kpi: 'Tasa de Conformidad de Flota (Vehicle Match %)',
-      target: '100%',
+      kpi: 'Tasa de Conformidad de Flota',
+      target: '100.0%',
       current: 'Auditable con VehicleID',
-      why: 'Asegura que cada conductor utilice el vehículo recomendado por el catálogo. Revela la omisión del campo VehicleTypeUsed en entregas reales.'
+      why: 'Asegura que cada conductor utilice el vehículo recomendado por el catálogo maestro.'
     },
     {
-      kpi: 'Tasa de Conciliación de Paradas vs Entregas (Brecha Faltante %)',
+      kpi: 'Tasa de Conciliación Paradas vs Entregas',
       target: '100.0% Coincidente',
-      current: '58.8% Cumplimiento (7 entregas faltantes: +3 en RT-A-01, +4 en RT-B-02)',
-      why: '¿Por qué?: Mide la brecha entre las 17 paradas planificadas en catálogo (8 en RT-A-01, 9 en RT-B-02) vs las 10 entregas reales registradas.'
+      current: '58.8% Cumplimiento',
+      why: 'Mide la brecha entre las 17 paradas en catálogo (RT-A-01 y RT-B-02) vs las 10 entregas reales registradas.'
     },
     {
-      kpi: 'Índice de Rutas Huérfanas (Orphan Route Index %)',
-      target: '0.0% Rutas Huérfanas',
-      current: '50.0% en Riesgo (10 de 20 entregas en RT-C-03 y RT-D-04 sin catálogo)',
-      why: '¿Por qué?: Mide el volumen de entregas operadas por DR-103 (5 en RT-C-03) y DR-104 (5 en RT-D-04) en rutas inexistentes en la tabla de rutas.'
+      kpi: 'Índice de Rutas Huérfanas',
+      target: '0.0% Huérfanas',
+      current: '50.0% en Riesgo',
+      why: 'Mide las 10 entregas en RT-C-03 y RT-D-04 operadas sin estar registradas en la tabla maestro routes.'
     },
     {
-      kpi: 'Tasa de Inconsistencia de Datos (Data Anomaly Rate)',
+      kpi: 'Tasa de Inconsistencia de Datos',
       target: '0.0%',
-      current: '10.0% (Anomalías)',
-      why: 'Garantiza que la toma de decisiones gerenciales se realice sobre datos 100% limpios y sin llaves huérfanas.'
+      current: '10.0% Anomalías',
+      why: 'Garantiza que la toma de decisiones gerenciales se realice sobre datos 100% limpios y validados.'
     }
   ];
 
