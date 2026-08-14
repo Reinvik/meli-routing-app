@@ -1,0 +1,332 @@
+import React from 'react';
+import { 
+  Lightbulb, 
+  TrendingUp, 
+  Truck, 
+  Award,
+  Sparkles,
+  ShieldAlert,
+  Box,
+  ThermometerSnowflake
+} from 'lucide-react';
+
+export const SolutionsView: React.FC = () => {
+  const solutionsList = [
+    {
+      id: 'sol-0',
+      title: '0. Consolidación Diaria de Flota & Ruteo Dinámico por Lote (VRP)',
+      problem: 'Gran cantidad de flota sub-utilizada y mal administrada: despliegue de 4 vehículos/choferes diarios para realizar solo 8 entregas por día (apenas 1.5h de trabajo efectivo por chofer), generando un sobrecosto operativo del 75%.',
+      proposal: 'Implementar algoritmo de Ruteo Dinámico Diario (Vehicle Routing Problem). Consolidar la demanda del día en 1 o 2 vehículos activos, optimizando la densidad de paradas por ruta.',
+      roi: 'Reducción del 75% en vehículos sobrantes en tránsito y ahorro masivo en combustible y remuneraciones de choferes.',
+      category: 'Planificación de Flota'
+    },
+    {
+      id: 'sol-1',
+      title: '1. Despacho Inteligente Sensible al Clima y Tráfico Denso',
+      problem: 'Uso ineficiente de furgones grandes (Large Vans) en corredores céntricos congestionados y bajo lluvia (Weather Rain / Traffic), perdiendo 55 a 65 min por no prever las condiciones ambientales y de maniobrabilidad.',
+      proposal: 'Algoritmo de asignación que conmuta a vehículos ágiles (Small Vans / Cars) cuando se detecte alerta de tráfico o lluvia en la zona de entrega.',
+      roi: 'Reducción del 40% en retrasos por congestión y lluvia, asegurando la inocuidad alimentaria.',
+      category: 'Operacional & Clima'
+    },
+    {
+      id: 'sol-2',
+      title: '2. Validación e Inteligencia Geográfica de Direcciones en Checkout',
+      problem: 'Fallas de sistema que permiten ingresar direcciones erróneas (Wrong Address), provocando retrasos extremos de hasta 90 minutos y desplazamientos de fecha de entrega.',
+      proposal: 'Integrar API de Autocompletado GPS y Geocodificación (Google Maps / Mapbox) obligatoria en el checkout de la app de Mercado Foods antes de procesar el pedido.',
+      roi: 'Eliminación del 100% de retrasos por direcciones erróneas o ambiguas.',
+      category: 'Tecnológica & Sistema'
+    },
+    {
+      id: 'sol-3',
+      title: '3. Pautas de Inspección Preventiva de Flota (*Pre-Trip Inspection*)',
+      problem: 'Averías mecánicas (`Vehicle Breakdown`) en motos debido a falta de mantenimiento preventivo y revisión técnica previa a la jornada.',
+      proposal: 'Checklist digital obligatorio en la app del conductor antes de iniciar el turno (revisión de neumáticos, frenos, nivel de aceite y cadena de transmisión).',
+      roi: 'Prevención del 90% de fallas mecánicas en ruta y protección de la cadena de frío.',
+      category: 'Mantenimiento & Flota'
+    },
+    {
+      id: 'sol-4',
+      title: '4. Integración de Peso Volumétrico (m³) y Capacidad Cúbica de Flota',
+      problem: 'El dataset omite el volumen cúbico (m³). Productos de alto volumen pero bajo peso (pañales, cereales) saturan maleteros independientemente del peso en kg.',
+      proposal: 'Calcular el Peso Volumétrico V = (L × W × H) / 5000 y fijar una ocupación cúbica máxima del 85% por vehículo para evitar saturación de carga.',
+      roi: 'Eliminación de rechazos de carga y prevención de aplastamiento de alimentos frágiles.',
+      category: 'Logística de Alimentos'
+    },
+    {
+      id: 'sol-5',
+      title: '5. Pipeline de Calidad de Datos y Restricciones Relacionales en Supabase',
+      problem: 'Inconsistencias de base de datos como la orden `DEL-20240103-004` con dirección nula (`WHERE address IS NULL`) y rutas huérfanas fuera de catálogo.',
+      proposal: 'Implementar restricciones de integridad referencial rígidas (`FOREIGN KEY`) en Supabase y validación de campos obligatorios en el API de la app.',
+      roi: '100% de confiabilidad e integridad de datos en el sistema relacional.',
+      category: 'Gobernanza de Datos'
+    },
+    {
+      id: 'sol-6',
+      title: '6. Columnas de Gobernanza: id_movil, tipo_movil, Capacidad (kg & m³) y Temperatura',
+      problem: 'Ausencia de identificador único de auto/móvil (`id_movil`), clasificación técnica (`tipo_movil`), volumen cúbico del paquete ($m^3$) y temperatura exigida por el alimento.',
+      proposal: 'Incorporar columnas obligatorias en la base de datos para mapear patente/ID de móvil, límite de peso (kg), volumen ($m^3$) y rango térmico (Congelado -18°C, Refrigerado 4°C-8°C, Ambiente).',
+      roi: 'Trazabilidad 100% de la flota por patente, prevención de averías por sobrecarga y garantía de inocuidad alimentaria.',
+      category: 'Arquitectura de Datos & Flota'
+    }
+  ];
+
+  const metricsFramework = [
+    {
+      kpi: 'On-Time Delivery (OTD %)',
+      target: '≥ 95.0%',
+      current: '78.9% (Operacional: 15/19) | 75.0% (Estricto: 15/20)',
+      why: 'Indicador principal de satisfacción del comprador. Mide el % de entregas a tiempo (15 entregadas de 19 válidas = 78.9% | 15 de 20 dataset = 75.0%). NUNCA 80.0% por la entrega nula.'
+    },
+    {
+      kpi: 'Kilometraje Total Recorrido (Eficiencia Espacial)',
+      target: '12.57 km',
+      current: '45.26 km',
+      why: 'La re-sectorización por clústeres elimina el cruce en paralelo de los 4 vehículos sobre el mismo corredor, reduciendo 32.69 km inútiles (-72.2%).'
+    },
+    {
+      kpi: 'Tiempo Promedio de Desviación por Ruta (Min Exceso)',
+      target: '≤ +5 min',
+      current: '+19 min (RT-A-01)',
+      why: 'Mide la precisión del modelo de planificación de tiempos frente al comportamiento real del tráfico urbano.'
+    },
+    {
+      kpi: 'Factor de Ocupación Cúbica (m³)',
+      target: '≤ 85.0% Cúbico',
+      current: 'Sin Medir (m³)',
+      why: 'Evita sobrepasar la capacidad física del maletero en productos livianos pero voluminosos (dilema del plomo vs las plumas).'
+    },
+    {
+      kpi: 'Tasa de Conformidad de Flota (Vehicle Match %)',
+      target: '100%',
+      current: 'Auditable con VehicleID',
+      why: 'Asegura que cada conductor utilice el vehículo recomendado por el catálogo. Revela la omisión del campo VehicleTypeUsed en entregas reales.'
+    },
+    {
+      kpi: 'Tasa de Conciliación de Paradas vs Entregas (Brecha Faltante %)',
+      target: '100.0% Coincidente',
+      current: '58.8% Cumplimiento (7 entregas faltantes: +3 en RT-A-01, +4 en RT-B-02)',
+      why: '¿Por qué?: Mide la brecha entre las 17 paradas planificadas en catálogo (8 en RT-A-01, 9 en RT-B-02) vs las 10 entregas reales registradas.'
+    },
+    {
+      kpi: 'Índice de Rutas Huérfanas (Orphan Route Index %)',
+      target: '0.0% Rutas Huérfanas',
+      current: '50.0% en Riesgo (10 de 20 entregas en RT-C-03 y RT-D-04 sin catálogo)',
+      why: '¿Por qué?: Mide el volumen de entregas operadas por DR-103 (5 en RT-C-03) y DR-104 (5 en RT-D-04) en rutas inexistentes en la tabla de rutas.'
+    },
+    {
+      kpi: 'Tasa de Inconsistencia de Datos (Data Anomaly Rate)',
+      target: '0.0%',
+      current: '10.0% (Anomalías)',
+      why: 'Garantiza que la toma de decisiones gerenciales se realice sobre datos 100% limpios y sin llaves huérfanas.'
+    }
+  ];
+
+  return (
+    <div className="space-y-8 pb-12">
+      {/* Banner */}
+      <div className="bg-slate-900/80 p-6 rounded-2xl border border-yellow-400/30">
+        <div className="flex items-center gap-2 text-yellow-400 text-xs font-bold uppercase tracking-wider mb-1">
+          <Lightbulb className="w-4 h-4" /> Soluciones Basadas en Datos & Marco de Métricas
+        </div>
+        <h2 className="text-2xl font-extrabold text-white">Plan de Acción Operativo & Métricas de Éxito</h2>
+        <p className="text-slate-400 text-sm mt-1">
+          Propuestas tecnológicas y operacionales para Mercado Foods acompañadas del cuadro de mando integral de KPIs.
+        </p>
+      </div>
+
+      {/* Special Insight Highlight: Route Sectorization Analysis */}
+      <div className="bg-gradient-to-r from-yellow-500/10 via-amber-500/10 to-slate-900 border border-yellow-400/40 p-6 rounded-2xl space-y-4 shadow-xl">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            <Sparkles className="w-5 h-5 text-yellow-400 shrink-0" />
+            <h3 className="text-lg font-extrabold text-white">
+              Análisis Crítico: ¿Son Óptimas las 4 Rutas Actuales?
+            </h3>
+          </div>
+          <span className="bg-yellow-400 text-slate-950 px-3 py-1 rounded-full font-black text-xs uppercase tracking-wider self-start md:self-auto">
+            Ahorro Potencial del 72.2%
+          </span>
+        </div>
+
+        <p className="text-xs text-slate-300 leading-relaxed">
+          <strong className="text-rose-400 font-bold">Respuesta: NO, las 4 rutas actuales no son óptimas.</strong> Al analizar las coordenadas GPS del dataset, descubrimos que las 4 rutas (<code className="text-yellow-300 font-mono">RT-A-01</code>, <code className="text-yellow-300 font-mono">RT-B-02</code>, <code className="text-yellow-300 font-mono">RT-C-03</code>, <code className="text-yellow-300 font-mono">RT-D-04</code>) se <strong className="text-white">solapan en paralelo cruzando de Este a Oeste todo el corredor metropolitano</strong> (-118.24° a -118.33°). Los 4 vehículos recorren el mismo trayecto en lugar de dividirse el territorio por zonas.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+          <div className="bg-slate-950 p-4 rounded-xl border border-rose-500/30 space-y-2">
+            <div className="flex items-center justify-between text-xs">
+              <span className="text-rose-400 font-bold flex items-center gap-1.5">
+                ❌ Asignación Actual (Solapada / Round-Robin)
+              </span>
+              <span className="font-mono text-rose-300 font-bold">45.26 km recorridos</span>
+            </div>
+            <p className="text-[11px] text-slate-400 leading-relaxed">
+              Los 4 vehículos recorren 45.26 km en total. Cada repartidor cruza toda la ciudad de punta a punta, pasando por al lado de entregas de otros conductores.
+            </p>
+          </div>
+
+          <div className="bg-slate-950 p-4 rounded-xl border border-emerald-500/40 space-y-2">
+            <div className="flex items-center justify-between text-xs">
+              <span className="text-emerald-400 font-bold flex items-center gap-1.5">
+                ✅ Re-Sectorización Propuesta (Clústeres Geográficos)
+              </span>
+              <span className="font-mono text-emerald-300 font-bold">12.57 km recorridos</span>
+            </div>
+            <p className="text-[11px] text-slate-300 leading-relaxed">
+              Al dividir las 20 entregas en 4 clústeres zonales compactos (Sector Este, Centro-Este, Centro-Oeste y Oeste), la distancia total baja a <strong>12.57 km (-72.2%)</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Solutions Grid */}
+      <div className="space-y-4">
+        <h3 className="text-lg font-bold text-white flex items-center gap-2">
+          <Truck className="w-5 h-5 text-yellow-400" /> Propuesta de Soluciones Estratégicas
+        </h3>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {solutionsList.map((sol) => (
+            <div key={sol.id} className="glass-panel p-6 rounded-2xl space-y-3 flex flex-col justify-between border-t-2 border-t-yellow-400">
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-mono font-extrabold px-2.5 py-0.5 rounded-lg bg-yellow-400/10 text-yellow-400 border border-yellow-400/20">
+                    {sol.category}
+                  </span>
+                  <span className="text-[10px] text-slate-400 font-mono font-semibold uppercase">Prioridad Alta</span>
+                </div>
+
+                <h4 className="text-base font-bold text-white">{sol.title}</h4>
+
+                <div className="text-xs space-y-1.5 pt-1">
+                  <p className="text-slate-400"><strong className="text-slate-300">Problema Detectado:</strong> {sol.problem}</p>
+                  <p className="text-slate-300"><strong className="text-yellow-400">Propuesta de Solución:</strong> {sol.proposal}</p>
+                </div>
+              </div>
+
+              <div className="bg-slate-950 p-3 rounded-xl border border-slate-800 text-xs flex items-center gap-2">
+                <TrendingUp className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span className="text-slate-200"><strong>ROI Estimado:</strong> {sol.roi}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Fleet Capacity & Temperature Matrix Table */}
+      <div className="glass-panel p-6 rounded-2xl space-y-4 border-l-4 border-l-rose-500">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div>
+            <div className="flex items-center gap-2 text-rose-400 text-xs font-bold uppercase tracking-wider mb-1">
+              <ThermometerSnowflake className="w-4 h-4 text-rose-400" /> Esquema de Gobernanza Propuesto & Aplicado
+            </div>
+            <h3 className="text-lg font-extrabold text-white">
+              Matriz de Especificación Térmica & Límites de Carga por Transporte (`id_movil` & `tipo_movil`)
+            </h3>
+            <p className="text-xs text-slate-400 mt-0.5">
+              Cada transporte cuenta con identificador único (`id_movil`), tipo técnico (`tipo_movil`), peso máximo (kg), volumen máximo ($m^3$) y rango térmico para inocuidad de alimentos.
+            </p>
+          </div>
+          <span className="bg-rose-500/20 text-rose-300 font-mono font-bold text-xs px-3 py-1.5 rounded-xl border border-rose-500/30 shrink-0 self-start md:self-auto">
+            Columnas Integradas al Modelo
+          </span>
+        </div>
+
+        <div className="overflow-x-auto pt-1">
+          <table className="w-full text-left border-collapse text-xs">
+            <thead>
+              <tr className="border-b border-slate-800 text-slate-300 uppercase font-bold text-[10px] tracking-wider bg-slate-950/80">
+                <th className="py-3 px-3">ID Móvil (`id_movil`)</th>
+                <th className="py-3 px-3">Tipo de Móvil (`tipo_movil`)</th>
+                <th className="py-3 px-3 text-center">Peso Máx. (`max_weight_kg`)</th>
+                <th className="py-3 px-3 text-center">Volumen Máx. (`max_volume_m3`)</th>
+                <th className="py-3 px-3">Rango Térmico (`temp_control`)</th>
+                <th className="py-3 px-3">Compatibilidad de Alimento</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-800/60 font-mono text-[11px]">
+              <tr className="hover:bg-slate-900/60 transition-colors">
+                <td className="py-3 px-3 font-bold text-rose-400">MOV-MOTO-01 / 02</td>
+                <td className="py-3 px-3 text-white font-sans font-semibold">Motocicleta Urbana con Mochila Térmica</td>
+                <td className="py-3 px-3 text-center font-bold text-yellow-300">30 kg max</td>
+                <td className="py-3 px-3 text-center font-bold text-cyan-300">0.12 m³ max</td>
+                <td className="py-3 px-3 text-emerald-400 font-sans font-bold">Refrigerado (4°C a 8°C)</td>
+                <td className="py-3 px-3 text-slate-300 font-sans">Lácteos frescos, postres, panadería ágil</td>
+              </tr>
+              <tr className="hover:bg-slate-900/60 transition-colors">
+                <td className="py-3 px-3 font-bold text-indigo-400">MOV-VAN-101 / 102</td>
+                <td className="py-3 px-3 text-white font-sans font-semibold">Small Van Isotérmica Dual-Temp</td>
+                <td className="py-3 px-3 text-center font-bold text-yellow-300">350 kg max</td>
+                <td className="py-3 px-3 text-center font-bold text-cyan-300">2.50 m³ max</td>
+                <td className="py-3 px-3 text-cyan-400 font-sans font-bold">Congelado (-18°C) / Refrigerado</td>
+                <td className="py-3 px-3 text-slate-300 font-sans">Helados, carnes congeladas, packs semanales</td>
+              </tr>
+              <tr className="hover:bg-slate-900/60 transition-colors">
+                <td className="py-3 px-3 font-bold text-amber-400">MOV-FURGON-201 / 202</td>
+                <td className="py-3 px-3 text-white font-sans font-semibold">Furgón Gran Tonelaje Refrigerado Activo</td>
+                <td className="py-3 px-3 text-center font-bold text-yellow-300">800 kg max</td>
+                <td className="py-3 px-3 text-center font-bold text-cyan-300">6.00 m³ max</td>
+                <td className="py-3 px-3 text-emerald-400 font-sans font-bold">Refrigerado Activo (0°C a 5°C)</td>
+                <td className="py-3 px-3 text-slate-300 font-sans">Cajas voluminosas, bebidas, abarrotes masivos</td>
+              </tr>
+              <tr className="hover:bg-slate-900/60 transition-colors">
+                <td className="py-3 px-3 font-bold text-purple-400">MOV-AUTO-301 / 302</td>
+                <td className="py-3 px-3 text-white font-sans font-semibold">Sedán Ejecutivo Compacto (Auto)</td>
+                <td className="py-3 px-3 text-center font-bold text-yellow-300">150 kg max</td>
+                <td className="py-3 px-3 text-center font-bold text-cyan-300">0.45 m³ max</td>
+                <td className="py-3 px-3 text-amber-400 font-sans font-bold">Ambiente / Coolbox Pasivo</td>
+                <td className="py-3 px-3 text-slate-300 font-sans">Abarrotes secos, enlatados, no perecederos</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Success Metrics Table */}
+      <div className="glass-panel p-6 rounded-2xl space-y-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="text-lg font-bold text-white flex items-center gap-2">
+              <Award className="w-5 h-5 text-yellow-400" /> Cuadro de Mando: Métricas de Éxito (KPIs)
+            </h3>
+            <p className="text-xs text-slate-400">Indicadores clave de rendimiento con justificación de impacto en el negocio</p>
+          </div>
+          <span className="text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-3 py-1 rounded-full font-semibold">
+            6 KPIs Definidos
+          </span>
+        </div>
+
+        <div className="overflow-x-auto">
+          <table className="w-full text-left border-collapse text-xs">
+            <thead>
+              <tr className="border-b border-slate-800 text-slate-300 uppercase font-bold text-[11px] tracking-wider">
+                <th className="py-3.5 px-4 min-w-[200px]">Métrica / KPI</th>
+                <th className="py-3.5 px-4 text-center min-w-[160px]">Meta (Target)</th>
+                <th className="py-3.5 px-4 text-center min-w-[240px]">Estado Actual</th>
+                <th className="py-3.5 px-4 min-w-[280px]">Justificación & Por qué es Clave</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-800/60">
+              {metricsFramework.map((m, idx) => (
+                <tr key={idx} className="hover:bg-slate-900/60 transition-colors">
+                  <td className="py-4 px-4 font-bold text-white leading-snug">{m.kpi}</td>
+                  <td className="py-4 px-4 text-center whitespace-nowrap">
+                    <span className="bg-emerald-950/80 text-emerald-300 border border-emerald-500/40 px-3 py-1.5 rounded-xl font-mono font-bold text-xs inline-block shadow-sm">
+                      {m.target}
+                    </span>
+                  </td>
+                  <td className="py-4 px-4 text-center whitespace-nowrap">
+                    <span className="bg-amber-950/80 text-amber-300 border border-amber-500/40 px-3 py-1.5 rounded-xl font-mono font-bold text-xs inline-block shadow-sm">
+                      {m.current}
+                    </span>
+                  </td>
+                  <td className="py-4 px-4 text-slate-300 leading-relaxed text-xs">{m.why}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+};
