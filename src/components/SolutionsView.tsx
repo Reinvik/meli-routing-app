@@ -55,11 +55,11 @@ export const SolutionsView: React.FC = () => {
     },
     {
       id: 'sol-5',
-      title: '5. Gobernanza de Datos & Consultas SQL de Control Automático (SQL 5, 9 y 10)',
+      title: '5. Auditoría Diaria Automatizada (Cron Jobs 08:00 AM) & Candados en Supabase',
       problem: 'Falta de datos en tablas esenciales (rutas huérfanas RT-C-03 y RT-D-04 ausentes en catálogo routes, entregas faltantes respecto a paradas planificadas, campo vehicle_id omitido en entregas y dirección nula en DEL-20240103-004).',
-      proposal: 'Implementar Consultas SQL de Control en tiempo real (SQL 5, 9 y 10 en SQL Explorer) con FULL OUTER JOIN para auditar brechas de datos, junto con restricciones rígidas de Integridad Referencial (FOREIGN KEY) y reglas NOT NULL en Supabase.',
-      roi: '100% de confiabilidad en la BD, detección proactiva de anomalías y garantía de toma de decisiones sobre datos 100% limpios.',
-      category: 'Gobernanza de Datos & SQL'
+      proposal: 'Implementar tareas programadas diarias (Cron Jobs a las 08:00 AM) que ejecutan automáticamente las Consultas SQL 5, 9 y 10 para detectar inconsistencias y enviar un reporte diario automático por correo a logística. Respaldado con candados rígidos de Integridad Referencial (FOREIGN KEY) y reglas NOT NULL en Supabase.',
+      roi: '100% de confiabilidad en la BD, reportes diarios automáticos en la bandeja de entrada y cero errores por datos faltantes.',
+      category: 'Automatización & Cron Jobs'
     },
     {
       id: 'sol-6',
