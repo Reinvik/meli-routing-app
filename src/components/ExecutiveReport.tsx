@@ -261,9 +261,39 @@ export const ExecutiveReport: React.FC<ExecutiveReportProps> = ({ routes, delive
           <h2 className="text-xl font-extrabold text-yellow-400 print:text-black border-b border-slate-800 print:border-slate-300 pb-2">
             1. Resumen Ejecutivo
           </h2>
-          <p className="text-sm text-slate-300 print:text-slate-800 leading-relaxed">
-            La evaluación operacional sobre el dataset de 20 entregas distribuidas en 3 días distintos (`2024-01-01`, `2024-01-02` y `2024-01-03`) revela una tasa de cumplimiento <strong className="text-yellow-400 print:text-black">On-Time Delivery (OTD) del 78.9% (Operacional: 15/19)</strong> y del <strong className="text-amber-400 print:text-black">75.0% (Estricto: 15/20)</strong>. El diagnóstico forense demuestra que los retrasos e ineficiencias provienen de dos grandes causas estructurales: <strong className="text-white print:text-black">1. Fallos de Planificación y Gestión de Flota</strong> (sub-utilización masiva de vehículos al desplegar 4 choferes para solo 8 paquetes por día, asignación de furgones grandes en tránsito denso sin considerar factores climáticos como lluvia, y rutas deficientes sin ruteo dinámico por lote), y <strong className="text-yellow-400 print:text-black">2. Deficiencias del Sistema e Integridad de Datos</strong> (falta de validación y geocodificación GPS de direcciones en checkout, generando retrasos extremos de 90 min y registros nulos).
-          </p>
+          <div className="bg-slate-950 print:bg-slate-100 p-5 rounded-xl border border-slate-800 print:border-slate-300 space-y-3.5 text-sm text-slate-300 print:text-slate-800">
+            <div className="flex items-center gap-2 text-base font-bold text-white print:text-black">
+              <span>🎯</span>
+              <span>Cumplimiento OTD: <strong className="text-yellow-400 print:text-black">78.9% (Operacional)</strong> / <strong className="text-amber-400 print:text-black">75.0% (Estricto)</strong></span>
+            </div>
+
+            <div className="space-y-1.5">
+              <strong className="text-rose-400 print:text-rose-800 flex items-center gap-1.5 font-bold">
+                <AlertTriangle className="w-4 h-4 text-rose-400 shrink-0" />
+                Inconsistencia Crítica de Datos & Tablas Faltantes:
+              </strong>
+              <ul className="list-disc list-inside space-y-1 pl-2 text-xs leading-relaxed">
+                <li>
+                  <strong className="text-white print:text-black">Rutas Huérfanas:</strong> Entregas registradas en <code className="text-yellow-300 font-mono">RT-C-03</code> y <code className="text-yellow-300 font-mono">RT-D-04</code> <strong>no existen en la tabla maestra <code className="font-mono">routes</code></strong> (10 de 20 entregas sin registro).
+                </li>
+                <li>
+                  <strong className="text-white print:text-black">Entregas y Paradas Faltantes:</strong> Discrepancia numérica entre las paradas planificadas por catálogo (8 a 11 paradas) vs las 5 entregas registradas por ruta en la tabla <code className="font-mono">deliveries</code>.
+                </li>
+                <li>
+                  <strong className="text-white print:text-black">Campos Esenciales Faltantes:</strong> Omisión de llaves operacionales críticas como <code className="text-yellow-300 font-mono">vehicle_id</code> (<code className="font-mono">id_vehiculo</code>) y <code className="text-yellow-300 font-mono">vehicle_type</code> en los registros de entrega real.
+                </li>
+              </ul>
+            </div>
+
+            <div className="space-y-1.5 pt-1">
+              <strong className="text-emerald-400 print:text-emerald-800 flex items-center gap-1.5 font-bold">
+                <span>🚚</span> Suboptimización de Rutas & Potencial de Ahorro del 75%:
+              </strong>
+              <p className="text-xs leading-relaxed pl-2">
+                Los trazados actuales están <strong>suboptimizados con trayectos cruzados e ineficientes</strong> (4 choferes recorren 45.26 km para solo 8 paquetes diarios). La re-sectorización por clústeres geográficos y ruteo dinámico por lote permite <strong>ahorrar hasta un 72.2% - 75% en distancia recorrida (de 45.26 km a 12.57 km)</strong> y liberar flota sobrante.
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Section 2: Concrete Answers to Specific Questions */}
