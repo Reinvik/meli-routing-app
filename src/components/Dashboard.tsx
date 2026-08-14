@@ -907,6 +907,68 @@ export const Dashboard: React.FC<DashboardProps> = ({ routes, deliveries, select
           </table>
         </div>
       </div>
+
+      {/* Infrastructure & Tools Implemented Section */}
+      <div className="glass-panel p-6 rounded-2xl space-y-4 border-t-2 border-t-yellow-400">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="text-lg font-bold text-white flex items-center gap-2">
+              <Database className="w-5 h-5 text-yellow-400" /> Infraestructura & Herramientas Implementadas
+            </h3>
+            <p className="text-xs text-slate-400">Stack tecnológico de ingeniería, inteligencia artificial y desplegado en producción</p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 text-xs font-mono">
+          <div className="bg-slate-950 p-3 rounded-xl border border-yellow-500/30 flex items-center gap-2.5 text-yellow-300">
+            <span className="w-2 h-2 rounded-full bg-yellow-400 shrink-0 animate-pulse"></span>
+            <div className="truncate">
+              <span className="block text-[10px] text-slate-400 font-sans">Agente de IA</span>
+              <strong className="text-white text-[11px] truncate">🤖 Antigravity AI</strong>
+            </div>
+          </div>
+
+          <div className="bg-slate-950 p-3 rounded-xl border border-blue-500/30 flex items-center gap-2.5 text-blue-300">
+            <span className="w-2 h-2 rounded-full bg-blue-400 shrink-0"></span>
+            <div className="truncate">
+              <span className="block text-[10px] text-slate-400 font-sans">Lenguaje Web & Framework</span>
+              <strong className="text-white text-[11px] truncate">💻 TypeScript + React</strong>
+            </div>
+          </div>
+
+          <div className="bg-slate-950 p-3 rounded-xl border border-emerald-500/30 flex items-center gap-2.5 text-emerald-300">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0"></span>
+            <div className="truncate">
+              <span className="block text-[10px] text-slate-400 font-sans">Sanitización de Datos</span>
+              <strong className="text-white text-[11px] truncate">🐍 Python 3.12</strong>
+            </div>
+          </div>
+
+          <div className="bg-slate-950 p-3 rounded-xl border border-cyan-500/30 flex items-center gap-2.5 text-cyan-300">
+            <span className="w-2 h-2 rounded-full bg-cyan-400 shrink-0"></span>
+            <div className="truncate">
+              <span className="block text-[10px] text-slate-400 font-sans">Base de Datos Relacional</span>
+              <strong className="text-white text-[11px] truncate">⚡ Supabase (meli)</strong>
+            </div>
+          </div>
+
+          <div className="bg-slate-950 p-3 rounded-xl border border-amber-500/30 flex items-center gap-2.5 text-amber-300">
+            <span className="w-2 h-2 rounded-full bg-amber-400 shrink-0"></span>
+            <div className="truncate">
+              <span className="block text-[10px] text-slate-400 font-sans">Cartografía GPS</span>
+              <strong className="text-white text-[11px] truncate">🗺️ Leaflet Maps</strong>
+            </div>
+          </div>
+
+          <div className="bg-slate-950 p-3 rounded-xl border border-purple-500/30 flex items-center gap-2.5 text-purple-300">
+            <span className="w-2 h-2 rounded-full bg-purple-400 shrink-0"></span>
+            <div className="truncate">
+              <span className="block text-[10px] text-slate-400 font-sans">Hosting & Producción</span>
+              <strong className="text-white text-[11px] truncate">☁️ Vercel (meli.nexus)</strong>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
